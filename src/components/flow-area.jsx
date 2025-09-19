@@ -18,6 +18,7 @@ export function FlowArea() {
     onPaneClick,
     onDrop,
     onDragOver,
+    onInit,
   } = useFlow();
 
   return (
@@ -33,12 +34,8 @@ export function FlowArea() {
         onPaneClick={onPaneClick}
         onDrop={onDrop}
         onDragOver={onDragOver}
+        onInit={onInit}
         connectionLineType="smoothstep"
-        zoomOnScroll={false}
-        panActivationKeyCode="Space"
-        panOnScroll={true}
-        panOnDrag={false}
-        fitView
       >
         <Background />
         <Controls />

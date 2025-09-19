@@ -1,9 +1,4 @@
-import {
-  addEdge,
-  useEdgesState,
-  useNodesState,
-  useReactFlow,
-} from "@xyflow/react";
+import { addEdge, useEdgesState, useNodesState } from "@xyflow/react";
 import * as React from "react";
 
 const FlowContext = React.createContext({});
@@ -34,7 +29,12 @@ export function FlowProvider({ children }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = React.useState(null);
-  const { screenToFlowPosition } = useReactFlow();
+  const [reactFlowInstance, setReactFlowInstance] = React.useState(null);
+
+  // Initialize ReactFlow instance
+  const onInit = React.useCallback((instance) => {
+    setReactFlowInstance(instance);
+  }, []);
 
   // Handle new connections between nodes
   const onConnect = React.useCallback(
@@ -71,7 +71,8 @@ export function FlowProvider({ children }) {
       const type = event.dataTransfer.getData("application/reactflow");
       if (!type) return;
 
-      const position = screenToFlowPosition({
+      // Use ReactFlow instance to get correct position
+      const position = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
@@ -81,7 +82,7 @@ export function FlowProvider({ children }) {
 
       setNodes((nodes) => nodes.concat(newNode));
     },
-    [setNodes, screenToFlowPosition],
+    [setNodes, reactFlowInstance],
   );
 
   const onDragOver = React.useCallback((event) => {
@@ -139,6 +140,8 @@ export function FlowProvider({ children }) {
         onDragOver,
         updateNodeData,
         validateFlow,
+        onInit,
+        reactFlowInstance,
       }}
     >
       {children}

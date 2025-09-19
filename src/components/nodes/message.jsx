@@ -18,23 +18,23 @@ export function MessageNode(props) {
           <MessageCircleMoreIcon className="size-4" />
           Send Message
         </div>
-
-        <Handle
-          id={`target_${nodeId}`}
-          type="target"
-          position={Position.Left}
-          className="size-2.5! border-2! bg-primary!"
-        />
-
-        <Handle
-          id={`source_${nodeId}`}
-          type="source"
-          position={Position.Right}
-          className="size-2.5! border-2! bg-primary!"
-        />
       </div>
 
       <div className="p-2 text-sm">{data.value || "Hello BiteSpeed 👋"}</div>
+
+      <Handle
+        id={`target_${nodeId}`}
+        type="target"
+        position={Position.Left}
+        className="size-2.5! border-2! bg-primary!"
+      />
+
+      <Handle
+        id={`source_${nodeId}`}
+        type="source"
+        position={Position.Right}
+        className="size-2.5! border-2! bg-primary!"
+      />
     </div>
   );
 }
