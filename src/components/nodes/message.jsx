@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 
 export function MessageNode(props) {
   const { selected, id: nodeId, data } = props;
-  console.log(props);
 
   return (
     <div
@@ -14,7 +13,7 @@ export function MessageNode(props) {
         selected && "border-ring ring-[3px] ring-ring/50",
       )}
     >
-      <div className="bg-secondary p-2">
+      <div className="rounded-t-xl bg-secondary p-2">
         <div className="pointer-events-none flex items-center gap-2 font-medium text-sm leading-none">
           <MessageCircleMoreIcon className="size-4" />
           Send Message
@@ -35,7 +34,7 @@ export function MessageNode(props) {
         />
       </div>
 
-      <div className="p-2">{data.value}</div>
+      <div className="p-2 text-sm">{data.value || "Hello BiteSpeed 👋"}</div>
     </div>
   );
 }
