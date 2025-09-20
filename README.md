@@ -1,5 +1,7 @@
 # BiteSpeed Assignment
 
+App - https://bitespeed-assignment-tau.vercel.app/
+
 ## Setup
 
 Pre setup step:
