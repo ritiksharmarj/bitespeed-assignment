@@ -108,13 +108,13 @@ export function FlowProvider({ children }) {
   const validateFlow = React.useCallback(() => {
     if (nodes.length <= 1) return { isValid: true };
 
-    // Find nodes without incoming connections (empty target handles)
-    const nodesWithoutIncoming = nodes.filter((node) => {
+    // Find nodes with empty target handles
+    const nodesWithEmptyTarget = nodes.filter((node) => {
       return !edges.some((edge) => edge.target === node.id);
     });
 
-    // If more than one node has no incoming connections, it's invalid
-    if (nodesWithoutIncoming.length > 1) {
+    // If more than one node has empty target handles, it's invalid
+    if (nodesWithEmptyTarget.length > 1) {
       return {
         isValid: false,
         error: "Cannot save flow",
